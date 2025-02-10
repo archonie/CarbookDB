@@ -14,19 +14,22 @@ public class CarsController: ControllerBase
     private readonly CreateCarCommandHandler _createCarQueryHandler;
     private readonly UpdateCarCommandHandler _updateCarQueryHandler;
     private readonly RemoveCarCommandHandler _removeCarQueryHandler;
+    private readonly GetCarWithBrandQueryHandler  _getCarWithBrandQueryHandler;
 
     public CarsController(
         GetCarQueryHandler getCarQueryHandler,
         GetCarByIdQueryHandler getCarByIdQueryHandler, 
         CreateCarCommandHandler createCarQueryHandler, 
         UpdateCarCommandHandler updateCarQueryHandler,
-        RemoveCarCommandHandler removeCarQueryHandler)
+        RemoveCarCommandHandler removeCarQueryHandler,
+        GetCarWithBrandQueryHandler getCarWithBrandQueryHandler)
     {
         _getCarQueryHandler = getCarQueryHandler;
         _getCarByIdQueryHandler = getCarByIdQueryHandler;
         _createCarQueryHandler = createCarQueryHandler;
         _updateCarQueryHandler = updateCarQueryHandler;
         _removeCarQueryHandler = removeCarQueryHandler;
+        _getCarWithBrandQueryHandler = getCarWithBrandQueryHandler;
     }
 
     [HttpGet]
@@ -62,5 +65,12 @@ public class CarsController: ControllerBase
     {
         await _updateCarQueryHandler.Handle(command);
         return Ok("Car updated");
+    }
+
+    [HttpGet("GetCarWithBrand")]
+    public async Task<IActionResult> GetCarWithBrand()
+    {
+        var values = await _getCarWithBrandQueryHandler.Handle();
+        return Ok(values);
     }
 }
