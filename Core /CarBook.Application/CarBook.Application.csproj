@@ -10,4 +10,9 @@
       <ProjectReference Include="..\..\Core\Carbook.Domain\Carbook.Domain.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <PackageReference Include="MediatR" Version="12.4.1" />
+      <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="9.0.1" />
+    </ItemGroup>
+
 </Project>
